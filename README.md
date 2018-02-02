@@ -13,7 +13,7 @@ Beside Shibboleth, this role will install Apache (httpd) with mod_ssl extension.
 Role Variables
 --------------
 
-No role variables are defined for this role. I concider to add {{ hostname }} in shibboleth2.xml at ApplicationDefaults:
+No role variables are defined for this role. I consider to add {{ hostname }} in shibboleth2.xml at ApplicationDefaults:
 ```
  <ApplicationDefaults entityID="https://MY_APP.ub.uu.se/shibboleth"
                          REMOTE_USER="eppn">
@@ -27,7 +27,7 @@ Apache with mod_ssl which this role make sure exist.
 Also make sure that firewalld are open, it is not taken care of in this role. I suggest to add a rich-rule for that in the playbook when testing:
 ```
 ## open firewall for httpds
-  - name: Open firewalld for svervice https for its-uu-net in public zone
+  - name: Open firewalld for service https for its-uu-net in public zone
     firewalld:
       rich_rule: 'rule family="ipv4" source address=130.238.xxx.0/24 service name="https" accept'
       zone: public
