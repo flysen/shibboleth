@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" entityID="https://app.ub.uu.se/shibboleth">
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
+    <md:Extensions>
+      <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+        <samla:Attribute xmlns:samla="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+          <samla:AttributeValue>http://www.swamid.se/category/research-and-education</samla:AttributeValue>
+          <samla:AttributeValue>http://www.swamid.se/category/hei-service</samla:AttributeValue>
+        </samla:Attribute>
+      </mdattr:EntityAttributes>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="sv">Uppsala Universitet</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="en">Uppsala University</mdui:DisplayName>
+        <mdui:Description xml:lang="sv">Applikationsserver med skyddad &#xE5;tkomst.</mdui:Description>
+        <mdui:Description xml:lang="en">Applicationserver with limited access</mdui:Description>
+        <mdui:InformationURL xml:lang="sv">https://ub.uu.se</mdui:InformationURL>
+        <mdui:InformationURL xml:lang="en">https://ub.uu.se</mdui:InformationURL>
+      </mdui:UIInfo>
+    </md:Extensions>
+    <md:KeyDescriptor>
+      <ds:KeyInfo>
+        <ds:X509Data>
+          <ds:X509Certificate>
+MIIECTCCAnGgAwIBAgIJALFF3i1NYsLNMA0GCSqGSIb3DQEBCwUAMCExHzAdBgNV
+BAMTFlVVQi1TTC1NSVNDMDIudWIudXUuc2UwHhcNMTgwMTMxMTYwOTI2WhcNMjgw
+...
+...
+...
+7f6U8R4z0u+tSg5W+gYcLArVkqxZLad0lesVZQ8TuTy4xU6CU38WqATfaomJOVik
+h4DUVVQqNjmBeIXblCmTK7nBMiIP3feNsoZh5Hc=
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://app.ub.uu.se/Shibboleth.sso/SAML2/POST" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://app.ub.uu.se/Shibboleth.sso/SAML2/POST-SimpleSign" index="2"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://app.ub.uu.se/Shibboleth.sso/SAML2/ECP" index="3"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://app.ub.uu.se/Shibboleth.sso/SAML/POST" index="4"/>
+  </md:SPSSODescriptor>
+</md:EntityDescriptor>
+

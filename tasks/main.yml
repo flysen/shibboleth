@@ -1,0 +1,81 @@
+---
+# tasks file for shibboleth
+## Install apache with req packages
+  - name: Install apache with req packages mod_ssl
+    yum: name={{item}} state=latest
+    with_items:
+      - httpd
+      - mod_ssl
+    notify: restart httpd
+
+## Install Shibboleth repos
+  - name: Install Shibboleth repository for CentOS7
+    get_url:
+       url: http://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo
+       dest: /etc/yum.repos.d
+
+## Check if Shibboleth is installed
+  - name: Check if Shibboleth is installed.
+    stat: path=/etc/shibboleth
+    register: shibboleth_bin
+
+## Install Shibboleth packages
+  - name: Install Shibboleth packages
+    yum: name={{item}} state=latest
+    with_items:
+      - shibboleth
+    when: not shibboleth_bin.stat.exists
+
+## Send UB temlates over to server
+  - name: Copy shibboleth2.xml to server
+    copy: 
+      src: "{{ role_path }}/files/shibboleth2.xml"
+      dest: /etc/shibboleth
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart shibd
+    when: not shibboleth_bin.stat.exists
+
+  - name: Copy attribute-map.xml to server
+    copy: 
+      src: "{{ role_path }}/files/attribute-map.xml"
+      dest: /etc/shibboleth
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart shibd
+    when: not shibboleth_bin.stat.exists
+
+  - name: Copy attribute-map.xml to server
+    copy:
+      src: "{{ role_path }}/files/shib.conf"
+      dest: /etc/httpd/conf.d
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart httpd
+    when: not shibboleth_bin.stat.exists
+
+  - name: Get the certificate from Swamid 
+    get_url:
+      url: https://mds.swamid.se/md/md-signer2.crt
+      dest: /etc/shibboleth/md-signer.crt
+    when: not shibboleth_bin.stat.exists
+
+## Create a secure directory for Shibboleth stuff and add index file
+  - name: Creates directory
+    file:
+      path: /var/www/html/secure
+      state: directory
+      owner: root
+      group: root
+    when: not shibboleth_bin.stat.exists
+
+  - name: Put a testfile to secure directory
+    copy:
+      src: "{{ role_path }}/files/index.html"
+      dest: /var/www/html/secure
+      owner: root
+      group: root
+    when: not shibboleth_bin.stat.exists

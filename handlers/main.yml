@@ -1,0 +1,13 @@
+---
+# handlers file for shibboleth
+- name: restart httpd 
+  service:
+    name: httpd.service
+    state: restarted
+    enabled: yes
+
+- name: restart shibd 
+  service:
+    name: shibd.service
+    state: restarted
+    enabled: yes
