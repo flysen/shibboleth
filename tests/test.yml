@@ -7,6 +7,7 @@
     vars:
       applicationdefaults_entityid: 'https://SERVER.uu.se'
       sso_entityid: 'https://weblogin.uu.se/idp/shibboleth' 
+      errors_supportcontact: 'my@email.se'
       
       #roles:
           #- { role: shibboleth, applicationdefaults_entityid: 'https://SERVER.uu.se' }
