@@ -27,13 +27,19 @@
     when: not shibboleth_bin.stat.exists
 
 ## Send UB temlates over to server
-  - name: Copy shibboleth2.xml to server
-    copy: 
-      src: "{{ role_path }}/files/shibboleth2.xml"
-      dest: /etc/shibboleth
-      owner: root
-      group: root
-      mode: 0644
+#  - name: Copy shibboleth2.xml to server
+#    copy: 
+#      src: "{{ role_path }}/files/shibboleth2.xml"
+#      dest: /etc/shibboleth
+#      owner: root
+#      group: root
+#      mode: 0644
+#    notify: restart shibd
+#    when: not shibboleth_bin.stat.exists
+
+  - name: Copy template shibboleth2.xml to server
+    template: src=shibboleth2.xml.j2
+              dest=/etc/shibboleth/shibboleth2.xml
     notify: restart shibd
     when: not shibboleth_bin.stat.exists
 
