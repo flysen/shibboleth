@@ -8,6 +8,8 @@
       applicationdefaults_entityid: 'https://SERVER.uu.se'
       sso_entityid: 'https://weblogin.uu.se/idp/shibboleth' 
       errors_supportcontact: 'my@email.se'
+      metadataprovider_uri: 'https://mds.swamid.se/md/swamid-idp.xml'
+      metadataprovider_backingfilepath: 'swamid-testing-idp.xml'
       
       #roles:
           #- { role: shibboleth, applicationdefaults_entityid: 'https://SERVER.uu.se' }
