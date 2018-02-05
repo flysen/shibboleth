@@ -35,6 +35,8 @@ script:
 
   - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml  
 
+  - sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c sp-cert.pem -h MYservreCname.se
+
     # Clean up
   - sudo docker stop "$(cat ${container_id})"
 
