@@ -1,3 +1,4 @@
 ---
 # defaults file for shibboleth
 applicationdefaults_entityid: "{{ inventory_hostname }}"
+sso_entityid: "https://weblogin.uu.se/idp/shibboleth"

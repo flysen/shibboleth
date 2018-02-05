@@ -1,6 +1,12 @@
 ---
 - hosts: localhost
   remote_user: root
-  roles:
-          - { role: shibboleth, applicationdefaults_entityid: 'https://SERVER.uu.se' }
+  - include_role:
+      name: shibboleth
+    vars:
+      applicationdefaults_entityid: 'https://SERVER.uu.se'
+      sso_entityid: 'https://weblogin.uu.se/idp/shibboleth' 
+      
+      #roles:
+          #- { role: shibboleth, applicationdefaults_entityid: 'https://SERVER.uu.se' }
     #- shibboleth
