@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
   remote_user: root
+  tasks:
   - include_role:
       name: shibboleth
     vars:
