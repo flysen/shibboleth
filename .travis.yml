@@ -17,6 +17,9 @@ before_install:
   - sudo docker pull ${distribution}:${version}
   # Customize container
   - sudo docker build --rm=true --file=tests/Dockerfile.${distribution} --tag=${distribution}:ansible tests
+  #Install libxml2-utils
+  - sudo docker exec "$(cat ${container_id})" sudo yum install libxml2-utils
+
 
 script:
     # Run container in detached state
