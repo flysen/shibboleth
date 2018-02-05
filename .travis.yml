@@ -33,6 +33,8 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
+  - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml  
+
     # Clean up
   - sudo docker stop "$(cat ${container_id})"
 
