@@ -104,4 +104,4 @@ BSD
 
 Author Information
 ------------------
-Fredrik L
+Fredrik Lysén
