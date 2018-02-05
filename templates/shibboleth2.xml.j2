@@ -67,7 +67,7 @@
         Allows overriding of error template information/filenames. You can
         also add attributes with values that can be plugged into the templates.
         -->
-        <Errors supportContact="it@ub.uu.se"
+        <Errors supportContact="{{ errors_supportcontact }}"
             helpLocation="/about.html"
             styleSheet="/shibboleth-sp/main.css"/>
         
@@ -76,8 +76,8 @@
         <!-- SWAMID Metadata -->
 	<MetadataProvider 
 		type="XML" 
-		uri="https://mds.swamid.se/md/swamid-idp.xml"
-		backingFilePath="swamid-testing-idp.xml" reloadInterval="300">
+		uri="{{ metadataprovider_uri }}"
+		backingFilePath="{{ metadataprovider_backingfilepath }}" reloadInterval="300">
 		<SignatureMetadataFilter certificate="md-signer.crt"/>
 	</MetadataProvider>
 
