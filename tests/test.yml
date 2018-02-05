@@ -2,4 +2,5 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - shibboleth
+    - { role: shibboleth, applicationdefaults_entityid: 'app.ub.uu.se' }
+    #- shibboleth
