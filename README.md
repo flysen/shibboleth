@@ -20,14 +20,14 @@ errors_supportcontact: "root@{{ inventory_hostname }}"
 metadataprovider_uri: "https://mds.swamid.se/md/swamid-idp.xml"
 metadataprovider_backingfilepath: "swamid-testing-idp.xml"
 ```
-<md:Extensions> in file "/etc/shibboleth/extensions.xml"
+### <md:Extensions> in file "/etc/shibboleth/extensions.xml"
 ```
 attributevalue: ['https://provider/category/one', 'https://provider/category/two']
 displayname: "My Higer Education and University"
 description: "Applicationserver with limited access"
 informationurl: "https://github.com"
 ```
-</md:Extensions>
+### </md:Extensions>
 
 I recommend to use a CNAME to ```applicationdefaults_entityid```.
 
