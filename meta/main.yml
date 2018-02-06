@@ -1,6 +1,6 @@
 galaxy_info:
   author: Fredrik Lysén
-  description: Handle shibboleth for higher education in Sweden 
+  description: Handle Shibboleth SP for higher education in Sweden 
   company: Uppsala University Library
   license: license (BSD, MIT)
 
@@ -14,4 +14,5 @@ galaxy_info:
     - shibboleth
     - sso
     - swamid
+    - sp
     - university
