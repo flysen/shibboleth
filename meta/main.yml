@@ -1,13 +1,17 @@
 galaxy_info:
   author: Fredrik Lysén
-  description: role to handle shibboleth for uu
-  company: Uppsala university Library
+  description: Handle shibboleth for higher education in Sweden 
+  company: Uppsala University Library
+  license: license (BSD, MIT)
 
-  license: license (GPLv2, CC-BY, etc)
-
-  min_ansible_version: 1.2
+  min_ansible_version: 1.9
 
   platforms:
-    - name: CentOS
+    - name: EL
       versions:
         - 7
+  galaxy_tags:
+    - shibboleth
+    - sso
+    - swamid
+    - university
