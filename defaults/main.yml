@@ -5,3 +5,7 @@ sso_entityid: "https://weblogin.uu.se/idp/shibboleth"
 errors_supportcontact: "root@{{ inventory_hostname }}"
 metadataprovider_uri: "https://mds.swamid.se/md/swamid-idp.xml"
 metadataprovider_backingfilepath: "swamid-testing-idp.xml"
+attributevalue: ['http://www.swamid.se/category/research-and-education', 'http://www.swamid.se/category/hei-service']
+displayname: "Uppsala University"
+description: "Applicationserver with limited access"
+informationurl: "https://uu.se"

@@ -10,4 +10,7 @@
       errors_supportcontact: 'my@email.se'
       metadataprovider_uri: 'https://mds.swamid.se/md/swamid-idp.xml'
       metadataprovider_backingfilepath: 'swamid-testing-idp.xml'
-      attributevalue: ['one', 'two']
+      attributevalue: ['https://provider/category/one', 'https://provider/category/two']
+      displayname: "My Higer Education and University"
+      description: "Applicationserver with limited access"
+      informationurl: "https://github.com"
