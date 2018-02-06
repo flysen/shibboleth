@@ -3,19 +3,19 @@
 Shibboleth
 =========
 
-A template role to handle SSO against swamid for higher education in Sweden, shibboleth authentication with Apache service.
+A template role to handle SAML SSO within the SWAMID federation for higher education in Sweden, using shibboleth authentication with Apache service.
 
 Requirements
 ------------
 
-Beside Shibboleth, this role will install Apache (httpd) with mod_ssl extension.
+Besides Shibboleth, this role will install Apache (httpd) with mod_ssl extension.
 
 Role Variables
 --------------
 
 ```
 applicationdefaults_entityid: "{{ inventory_hostname }}"
-sso_entityid: "https://weblogin.uu.se/idp/shibboleth"
+sso_entityid: "https://IdP.URL/idp/shibboleth"
 errors_supportcontact: "root@{{ inventory_hostname }}"
 metadataprovider_uri: "https://mds.swamid.se/md/swamid-idp.xml"
 metadataprovider_backingfilepath: "swamid-testing-idp.xml"
@@ -30,9 +30,9 @@ Apache with mod_ssl which this role make sure exist.
 Also make sure that firewalld are open, it is not taken care of in this role. I suggest to add a rich-rule for that in the playbook when testing:
 ```
 ## open firewall for httpds
-  - name: Open firewalld for service https for its-uu-net in public zone
+  - name: Open firewalld for service https in the public zone
     firewalld:
-      rich_rule: 'rule family="ipv4" source address=130.238.xxx.0/24 service name="https" accept'
+      rich_rule: 'rule family="ipv4" source address=xxx.xxx.xxx.0/24 service name="https" accept'
       zone: public
       permanent: true
       state: enabled
@@ -59,8 +59,8 @@ Example Playbook
   - include_role:
       name: shibboleth
     vars:
-      applicationdefaults_entityid: 'https://SERVER.uu.se'
-      sso_entityid: 'https://weblogin.uu.se/idp/shibboleth' 
+      applicationdefaults_entityid: 'https://SP.URL'
+      sso_entityid: 'https://IdP.URL/idp/shibboleth' 
       errors_supportcontact: 'my@email.se'
       metadataprovider_uri: 'https://mds.swamid.se/md/swamid-idp.xml'
       metadataprovider_backingfilepath: 'swamid-testing-idp.xml'
@@ -82,7 +82,7 @@ The entityID will probably be the CNAME of the server ```applicationdefaults_ent
 
 ## Metadata
 
-The metadata can easily be generated via ``` /etc/shibboleth/metagen.sh -c sp-cert.pem -h MY_CNAME.ub.uu.se ```. The output will then be displayed to stout in the terminal. Copy that to a new textfile for example named metadata.xml, we will use that later.
+The metadata can easily be generated via ``` /etc/shibboleth/metagen.sh -c sp-cert.pem -h MY_CNAME.URL ```. The output will then be displayed to stout in the terminal. Copy that to a new textfile for example named metadata.xml, we will use that later.
 
 ## Extra metadata
 
@@ -111,4 +111,4 @@ BSD
 
 Author Information
 ------------------
-Fredrik Lysén
+Lords of the Shib
