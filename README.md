@@ -19,6 +19,12 @@ sso_entityid: "https://IdP.URL/idp/shibboleth"
 errors_supportcontact: "root@{{ inventory_hostname }}"
 metadataprovider_uri: "https://mds.swamid.se/md/swamid-idp.xml"
 metadataprovider_backingfilepath: "swamid-testing-idp.xml"
+attributevalue: ['https://provider/category/one', 'https://provider/category/two']
+# <md:Extensions> in file "/etc/shibboleth/extensions.xml"
+displayname: "My Higer Education and University"
+description: "Applicationserver with limited access"
+informationurl: "https://github.com"
+# </md:Extensions>
 ```
 
 I recommend to use a CNAME to ```applicationdefaults_entityid```.
@@ -64,6 +70,10 @@ Example Playbook
       errors_supportcontact: 'my@email.se'
       metadataprovider_uri: 'https://mds.swamid.se/md/swamid-idp.xml'
       metadataprovider_backingfilepath: 'swamid-testing-idp.xml'
+      attributevalue: ['https://provider/category/one', 'https://provider/category/two']
+      displayname: "My Higer Education and University"
+      description: "Applicationserver with limited access"
+      informationurl: "https://github.com"
 ```
 
 Post Configuration
@@ -102,7 +112,8 @@ To Do
 -----
 
 * Validate generated metadata against xsd with xmllint
-* Add the extra block of xml with xmlstarlet and revalidate the xml against xsd
+* Validate extended block in /etc/shibboleth/extensions.xml against xsd 
+* Include the extended block in metadata.xml and validate
 
 License
 -------
