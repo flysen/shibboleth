@@ -3,7 +3,7 @@
 Shibboleth
 =========
 
-A template role for Uppsala universitet library to handle shibboleth authentication with Apache service
+A template role to handle SSO against swamid for higher education in Sweden, shibboleth authentication with Apache service.
 
 Requirements
 ------------
@@ -13,12 +13,15 @@ Beside Shibboleth, this role will install Apache (httpd) with mod_ssl extension.
 Role Variables
 --------------
 
-No role variables are defined for this role. I consider to add {{ hostname }} in shibboleth2.xml at ApplicationDefaults:
 ```
- <ApplicationDefaults entityID="https://MY_APP.ub.uu.se/shibboleth"
-                         REMOTE_USER="eppn">
+applicationdefaults_entityid: "{{ inventory_hostname }}"
+sso_entityid: "https://weblogin.uu.se/idp/shibboleth"
+errors_supportcontact: "root@{{ inventory_hostname }}"
+metadataprovider_uri: "https://mds.swamid.se/md/swamid-idp.xml"
+metadataprovider_backingfilepath: "swamid-testing-idp.xml"
 ```
-But this will probably be a CNAME anyway.... 
+
+I recommend to use a CNAME to ```applicationdefaults_entityid```.
 
 Dependencies
 ------------
@@ -49,17 +52,25 @@ Example Playbook
 ----------------
 
 ```
+---
 - hosts: localhost
-  become: true
-  roles:
-    -  shibboleth
+  remote_user: root
+  tasks:
+  - include_role:
+      name: shibboleth
+    vars:
+      applicationdefaults_entityid: 'https://SERVER.uu.se'
+      sso_entityid: 'https://weblogin.uu.se/idp/shibboleth' 
+      errors_supportcontact: 'my@email.se'
+      metadataprovider_uri: 'https://mds.swamid.se/md/swamid-idp.xml'
+      metadataprovider_backingfilepath: 'swamid-testing-idp.xml'
 ```
 
 Post Configuration
 ------------------
 
 When shibboleth installed via anslible-playbool some configuration steps need to be taken:
-1. Change entityID in /etc/shibboleth/shibboleth2.xml to match your service
+1. Change entityID ```applicationdefaults_entityid``` in /etc/shibboleth/shibboleth2.xml to match your service
 2. generate metadata template that you need to send to operation@swamid.se
 3. Add some extra tags in the metadata to make Swamid happy
 4. Validate your metadata file
@@ -67,7 +78,7 @@ When shibboleth installed via anslible-playbool some configuration steps need to
 
 ## entityID
 
-The entityID will probably be the CNAME of the server
+The entityID will probably be the CNAME of the server ```applicationdefaults_entityid```
 
 ## Metadata
 
@@ -90,12 +101,8 @@ Attache the validated metadata.xml to swamid@operation.se
 To Do
 -----
 
-Make a template of shibboleth2.xml and use variables for:
-* ApplicationDefaults -> entityID REMOTE_USER
-* Sessions -> handlerSSL cookieProps
-* Errors -> supportContact
-* SSO -> entityID
-* Handler Status -> acl
+* Validate generated metadata against xsd with xmllint
+* Add the extra block of xml with xmlstarlet and revalidate the xml against xsd
 
 License
 -------
