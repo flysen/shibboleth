@@ -1,0 +1,17 @@
+    <md:Extensions>
+      <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+        <samla:Attribute xmlns:samla="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+{% for attrv in attributevalue %}
+          <samla:AttributeValue>{{ attrv }}</samla:AttributeValue>
+{% endfor %}
+        </samla:Attribute>
+      </mdattr:EntityAttributes>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="sv">Uppsala Universitet</mdui:DisplayName>
+        <mdui:DisplayName xml:lang="en">Uppsala University</mdui:DisplayName>
+        <mdui:Description xml:lang="sv">Applikationsserver med skyddad &#xE5;tkomst.</mdui:Description>
+        <mdui:Description xml:lang="en">Applicationserver with limited access</mdui:Description>
+        <mdui:InformationURL xml:lang="sv">https://ub.uu.se</mdui:InformationURL>
+        <mdui:InformationURL xml:lang="en">https://ub.uu.se</mdui:InformationURL>
+      </mdui:UIInfo>
+    </md:Extensions>
