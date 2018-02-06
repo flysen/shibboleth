@@ -39,6 +39,9 @@ script:
     # Show the xmlfile i terminal
   - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml
 
+    # Show extensions.xml file
+  - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/extensions.xml
+
     # Try to generate metadata file
   - sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h MYservreCname.se
 
