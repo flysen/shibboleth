@@ -15,6 +15,6 @@
 - name: merge metadata
   blockinfile:
     block: "{{ lookup('file', '/etc/shibboleth/extensions.xml') }}"
-    dest: "/etc/shibboleth/metadata_pre.xml"
+    dest: "/etc/shibboleth/metadata.xml"
     insertafter: "<md:SPSSODescriptor"
     marker: "<!-- {mark} ANSIBLE MANAGED BLOCK MERGED FROM EXTENSIONS.XML-->"
