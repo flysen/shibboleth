@@ -39,7 +39,7 @@
     when: not shibboleth_bin.stat.exists
 
   - name: Create metadata_pre.xml for this sp
-    command: /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h testserver.se > /etc/shibboleth/metadata_pre.xml
+    shell: /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h testserver.se > /etc/shibboleth/metadata_pre.xml
     args: 
       chdir: /etc/shibboleth/
       creates: /etc/shibboleth/metadata_pre.xml
