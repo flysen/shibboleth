@@ -28,7 +28,7 @@ script:
     # Syntax check
   - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/shibboleth/tests/test.yml --syntax-check
     # Test role
-  - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/shibboleth/tests/test.yml -vv
+  - sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/shibboleth/tests/test.yml -vvv
     # Idempotence test
   - >
     sudo docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/shibboleth/tests/test.yml
@@ -37,21 +37,16 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
     # Show the xmlfile i terminal
-  - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml
+    #  - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml
 
     # Show extensions.xml file
   - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/extensions.xml
 
     # Try to generate metadata file
-  - sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h MYservreCname.se
+    #  - sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h MYservreCname.se
 
     # cat file /etc/shibboleth/metadata_pre.xml
   - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/metadata_pre.xml
-
-    # Validate metadata agains xsd
-    #- >
-    #sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h MYservreCname.se
-    #|xmllint /usr/share/xml/shibboleth/shibboleth.xsd --noout
 
     # Clean up
   - sudo docker stop "$(cat ${container_id})"
