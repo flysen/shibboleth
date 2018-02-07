@@ -40,8 +40,6 @@
 
   - name: Create metadata_pre.xml for this sp
     command: /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h {{ applicationdefaults_entityid }} > /etc/shibboleth/metadata_pre.xml
-    args:
-      chdir: /etc/shibboleth/
     when: not shibboleth_bin.stat.exists
 
   - name: Copy attribute-map.xml to server
