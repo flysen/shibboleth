@@ -32,10 +32,17 @@
     notify: restart shibd
     when: not shibboleth_bin.stat.exists
 
-  - name: Create extensions.xml from templater
+  - name: Create extensions.xml from template
     template: src=extensions.xml.j2
               dest=/etc/shibboleth/extensions.xml
     notify: restart shibd
+    when: not shibboleth_bin.stat.exists
+
+  - name: Create metadata_pre.xml for this sp
+    command: /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h {{ applicationdefaults_entityid }}
+    args:
+      chdir: /etc/shibboleth/
+      creates: /etc/shibboleth/metadata_pre.xml
     when: not shibboleth_bin.stat.exists
 
   - name: Copy attribute-map.xml to server
