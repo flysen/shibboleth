@@ -37,13 +37,13 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
     # Show the xmlfile i terminal
-    #  - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml
+  - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/shibboleth2.xml
 
     # Show extensions.xml file
   - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/extensions.xml
 
     # Try to generate metadata file
-    #  - sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h MYservreCname.se
+  - sudo docker exec "$(cat ${container_id})" /etc/shibboleth/metagen.sh -c /etc/shibboleth/sp-cert.pem -h MYservreCname.se
 
     # cat file /etc/shibboleth/metadata_pre.xml
   - sudo docker exec "$(cat ${container_id})" cat /etc/shibboleth/metadata_pre.xml

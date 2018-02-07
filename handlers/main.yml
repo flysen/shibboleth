@@ -11,3 +11,9 @@
     name: shibd.service
     state: restarted
     enabled: yes
+
+- name: merge metadata
+  blockinfile:
+    block: "{{ lookup('file', '/etc/shibboleth/extensions.xml') }}"
+    dest: "/etc/shibboleth/metadata_pre.xml"
+    insertafter: "<md:SPSSODescriptor"

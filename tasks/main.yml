@@ -43,7 +43,8 @@
     args: 
       chdir: /etc/shibboleth/
       creates: /etc/shibboleth/metadata_pre.xml
-    when: not shibboleth_bin.stat.exists
+    notify: merge metadata
+    when: not shibboleth_bin.stat.exists  
 
   - name: Copy attribute-map.xml to server
     copy: 
