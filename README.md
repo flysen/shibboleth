@@ -81,41 +81,27 @@ Example Playbook
 Post Configuration
 ------------------
 
-When shibboleth installed via anslible-playbool some configuration steps need to be taken:
-1. Change entityID ```applicationdefaults_entityid``` in /etc/shibboleth/shibboleth2.xml to match your service
-2. generate metadata template that you need to send to operation@swamid.se
-3. Add some extra tags in the metadata to make Swamid happy
-4. Validate your metadata file
-5. Send it to Swamid
+When shibboleth installed via anslible-playbook your configuration are done and no further steps need to be taken.
+1. Validate your metadata file /etc/shibboleth/metadata.xml
+2. Grab the file /etc/shibboleth/metadata.xml and send to operation@swamid.se
 
-## entityID
-
-The entityID will probably be the CNAME of the server ```applicationdefaults_entityid```
 
 ## Metadata
 
-The metadata can easily be generated via ``` /etc/shibboleth/metagen.sh -c sp-cert.pem -h MY_CNAME.URL ```. The output will then be displayed to stout in the terminal. Copy that to a new textfile for example named metadata.xml, we will use that later.
+The metadata can easily be regenerated via ``` /etc/shibboleth/metagen.sh -c sp-cert.pem -h MY_CNAME.URL ```. The output will then be displayed to stout in the terminal. Copy that to a new textfile for example named metadata.xml. Note that /etc/shibboleth/extensions.xml vill not be included then.
 
 ## Extra metadata
 
-To meet Swamids requiments we need to add some extensions to previous created file metadata.xml. 
-* First we need to tell what attributes (federation) we will use. Se full example in this role example folder (metadata.xml).
-* We also need to add some information regarding our purpose and organisation Se full example in this role example folder (metadata.xml).
+To meet Swamids requiments we need to add some extensions. Those are created by ansible and found in /etc/shibboleth/extensions.xml. 
 
-## validate metadata.xml
+## validate /etc/shibboleth/metadata.xml
 
 https://www.samltool.com/validate_xml.php and use schema Metadata
-
-## Send to Swamid
-
-Attache the validated metadata.xml to swamid@operation.se
 
 To Do
 -----
 
-* Validate generated metadata against xsd with xmllint
-* Validate extended block in /etc/shibboleth/extensions.xml against xsd 
-* Include the extended block in metadata.xml and validate
+Add Logotype URL (<mdui:Logo>) *MAY* https://wiki.sunet.se/pages/viewpage.action?pageId=17138098 (not mandatory)
 
 License
 -------
