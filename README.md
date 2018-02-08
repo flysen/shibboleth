@@ -12,7 +12,7 @@ Besides Shibboleth, this role will install Apache (httpd) with mod_ssl extension
 
 Role Variables
 --------------
-
+Metadata in file "/etc/shibboleth/metadata.xml"
 ```
 applicationdefaults_entityid: "{{ inventory_hostname }}"
 sso_entityid: "https://IdP.URL/idp/shibboleth"
@@ -20,14 +20,19 @@ errors_supportcontact: "root@{{ inventory_hostname }}"
 metadataprovider_uri: "https://mds.swamid.se/md/swamid-idp.xml"
 metadataprovider_backingfilepath: "swamid-testing-idp.xml"
 ```
-### <md:Extensions> in file "/etc/shibboleth/extensions.xml"
+Extensions in file "/etc/shibboleth/extensions.xml"
 ```
+# Entity Categories for Service Providers. (*MUST*)
 attributevalue: ['https://provider/category/one', 'https://provider/category/two']
+# Friendly name of the Service Provider, shall not be a domain name. (*SHOULD*)
 displayname: "My Higer Education and University"
+# A shorter description (140 characters or less) of the Service Provider. (*MAY*)
 description: "Applicationserver with limited access"
+# A URL to a web-page that complements the description with further information about the service that the Service Provider offers. (*MAY*)
 informationurl: "https://github.com"
+# A URL to the a image file of the service logotype. (*MAY*)
+logo: "https://www.example.se/images/logo.png"
 ```
-### </md:Extensions>
 
 I recommend to use a CNAME to ```applicationdefaults_entityid```.
 
@@ -76,6 +81,7 @@ Example Playbook
       displayname: "My Higer Education and University"
       description: "Applicationserver with limited access"
       informationurl: "https://github.com"
+      logo: "https://www.example.se/images/logo.png"
 ```
 
 Post Configuration
