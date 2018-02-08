@@ -39,7 +39,7 @@
     when: not shibboleth_bin.stat.exists
 
   - name: Create metadata.xml for this sp and merge with extensions.xml
-    shell: /etc/shibboleth/metagen.sh -L -c /etc/shibboleth/sp-cert.pem -h testserver.se -e 'https://testserver.se/Shibboleth.sso' | grep -v 'POST-SimpleSign' > /etc/shibboleth/metadata.xml
+    shell: /etc/shibboleth/metagen.sh -2 -L -c /etc/shibboleth/sp-cert.pem -h testserver.se -e 'https://testserver.se/Shibboleth.sso' | grep -v 'POST-SimpleSign' > /etc/shibboleth/metadata.xml
     args: 
       chdir: /etc/shibboleth/
       creates: /etc/shibboleth/metadata.xml
