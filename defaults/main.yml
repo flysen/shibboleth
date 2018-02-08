@@ -9,3 +9,4 @@ attributevalue: ['http://www.swamid.se/category/research-and-education', 'http:/
 displayname: "Uppsala University"
 description: "Applicationserver with limited access"
 informationurl: "https://uu.se"
+# logo: "https://www.example.se/images/logo.png"

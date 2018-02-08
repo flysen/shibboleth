@@ -10,5 +10,8 @@
         <mdui:DisplayName xml:lang="en">{{ displayname }}</mdui:DisplayName>
         <mdui:Description xml:lang="en">{{ description  }}</mdui:Description>
         <mdui:InformationURL xml:lang="en">{{ informationurl  }}</mdui:InformationURL>
+{% if logo != none %}
+        <mdui:Logo height="100" width="100">{{ logo }}</mdui:Logo>
+{% endif %}
       </mdui:UIInfo>
     </md:Extensions>
