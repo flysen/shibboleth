@@ -10,7 +10,7 @@ Requirements
 
 Besides Shibboleth, this role will install Apache (httpd) with mod_ssl extension.
 
-Role Variables
+Role Variables and their default values
 --------------
 Metadata in file "/etc/shibboleth/metadata.xml"
 ```
