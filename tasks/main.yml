@@ -44,7 +44,7 @@
 
 ## No certificates create key and cert
   - name: Create self-signed certificate
-    shell: /etc/shibboleth/keygen.sh -h guest.management.com -y 3
+    shell: /etc/shibboleth/keygen.sh -h  '{{ applicationdefaults_entityid }}' -y 3
     args:
       chdir: /etc/shibboleth/
   
