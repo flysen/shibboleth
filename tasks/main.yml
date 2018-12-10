@@ -2,10 +2,12 @@
 # tasks file for shibboleth
 ## Install apache with req packages
   - name: Install apache with req packages mod_ssl
-    yum: name={{item}} state=latest
-    with_items:
-      - httpd
-      - mod_ssl
+    yum:
+      name: "{{ apache_packages }}"
+    vars:
+      apache_packages:
+        - httpd
+        - mod_ssl
     notify: restart httpd
 
 ## Install Shibboleth repos
@@ -21,9 +23,11 @@
 
 ## Install Shibboleth packages
   - name: Install Shibboleth packages
-    yum: name={{item}} state=latest
-    with_items:
-      - shibboleth
+    yum:
+      name: "{{ shib_packages }}"
+    vars:
+      shib_packages:
+        - shibboleth
     when: not shibboleth_bin.stat.exists
 
   - name: Copy template shibboleth2.xml to server
