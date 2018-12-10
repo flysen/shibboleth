@@ -38,6 +38,24 @@
     notify: restart shibd
     when: not shibboleth_bin.stat.exists
 
+## Check if selfsigned certificate exist
+  - name: Check if there is a signing certificate locally
+    stat:
+      path: /etc/shibboleth/sp-cert.pem"
+    register: have_sign_cert
+
+  - name: Check if there is a signing key locally
+    stat:
+      path: /etc/shibboleth/sp-cert.key
+    register: have_sign_key
+
+## No certificates create key and cert
+  - name: Create self-signed certificate
+    shell: /etc/shibboleth/keygen.sh -f -h guest.management.com -y 3
+    args:
+      chdir: /etc/shibboleth/
+  
+## Continue to create metadata
   - name: Create metadata.xml for this sp and merge with extensions.xml
     shell: /etc/shibboleth/metagen.sh -A -2 -L -c /etc/shibboleth/sp-cert.pem -h {{ inventory_hostname }} -e '{{ applicationdefaults_entityid }}/Shibboleth.sso' | grep -v 'POST-SimpleSign' | grep -v 'PAOS' > /etc/shibboleth/metadata.xml
     args: 
