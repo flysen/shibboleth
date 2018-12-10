@@ -2,10 +2,12 @@
 # tasks file for shibboleth
 ## Install apache with req packages
   - name: Install apache with req packages mod_ssl
-    yum: name={{item}} state=latest
-    with_items:
-      - httpd
-      - mod_ssl
+    yum:
+      name: "{{ apache_packages }}"
+    vars:
+      apache_packages:
+        - httpd
+        - mod_ssl
     notify: restart httpd
 
 ## Install Shibboleth repos
@@ -21,9 +23,11 @@
 
 ## Install Shibboleth packages
   - name: Install Shibboleth packages
-    yum: name={{item}} state=latest
-    with_items:
-      - shibboleth
+    yum:
+      name: "{{ shib_packages }}"
+    vars:
+      shib_packages:
+        - shibboleth
     when: not shibboleth_bin.stat.exists
 
   - name: Copy template shibboleth2.xml to server
@@ -38,6 +42,13 @@
     notify: restart shibd
     when: not shibboleth_bin.stat.exists
 
+## No certificates create key and cert
+  - name: Create self-signed certificate
+    shell: /etc/shibboleth/keygen.sh -h  '{{ applicationdefaults_entityid }}' -y 3
+    args:
+      chdir: /etc/shibboleth/
+  
+## Continue to create metadata
   - name: Create metadata.xml for this sp and merge with extensions.xml
     shell: /etc/shibboleth/metagen.sh -A -2 -L -c /etc/shibboleth/sp-cert.pem -h {{ inventory_hostname }} -e '{{ applicationdefaults_entityid }}/Shibboleth.sso' | grep -v 'POST-SimpleSign' | grep -v 'PAOS' > /etc/shibboleth/metadata.xml
     args: 
